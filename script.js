@@ -367,7 +367,22 @@ function handleReservationAnswer(text) {
     chatState.mode = null;
     chatState.step = 0;
     chatState.data = {};
+async function sendMessage() {
+  const msg = document.getElementById("msg").value;
+
+  const res = await fetch("https://dayaa-el-kawn.vercel.app/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: msg })
+  });
+
+  const data = await res.json();
+  document.getElementById("reply").innerText = data.reply;
 }
+
+}
+
+
 
 /* Optional: to integrate an external AI (OpenAI/other) replace getBotReply with an async function that calls your API.
    For security, do NOT put API keys in client-side JS; instead use a server endpoint that proxies requests.
